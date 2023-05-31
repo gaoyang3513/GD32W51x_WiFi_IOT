@@ -57,7 +57,14 @@ target_link_options(${TARGET_EXE}
     -Wl,--cref
 )
 
-add_custom_command(TARGET ${TARGET_EXE} POST_BUILD
-    COMMAND ${TAGET_PROJECT_DIR}/nspe_afterbuild.bat ${TAGET_PROJECT_DIR}/GCC/output/bin GCC \"\"
-    COMMENT "Building ${TARGET_EXE}"
-)
+if(CMAKE_HOST_UNIX)
+    add_custom_command(TARGET ${TARGET_EXE} POST_BUILD
+        COMMAND ${TAGET_PROJECT_DIR}/nspe_afterbuild.sh ${TAGET_PROJECT_DIR}/GCC/output/bin GCC \"\"
+        COMMENT "Building ${TARGET_EXE}"
+    )
+elseif(CMAKE_HOST_WIN32)
+    add_custom_command(TARGET ${TARGET_EXE} POST_BUILD
+        COMMAND ${TAGET_PROJECT_DIR}/nspe_afterbuild.bat ${TAGET_PROJECT_DIR}/GCC/output/bin GCC \"\"
+        COMMENT "Building ${TARGET_EXE}"
+    )
+endif()
