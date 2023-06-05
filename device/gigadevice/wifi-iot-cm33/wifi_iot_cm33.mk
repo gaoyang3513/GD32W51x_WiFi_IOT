@@ -12,12 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, device/generic/mini-emulator-armv7-a-neon/mini_emulator_common.mk)
-
-PRODUCT_NAME := wifi_iot_cm33
+PRODUCT_NAME   := wifi_iot_cm33
 PRODUCT_DEVICE := wifi-iot-cm33
-PRODUCT_BRAND := Android
-PRODUCT_MODEL := wifi-iot-cm33
+PRODUCT_BRAND  := Rtos
+PRODUCT_MODEL  := wifi-iot-cm33
 
 LOCAL_KERNEL := prebuilts/qemu-kernel/mips/kernel-qemu
 PRODUCT_COPY_FILES += \
