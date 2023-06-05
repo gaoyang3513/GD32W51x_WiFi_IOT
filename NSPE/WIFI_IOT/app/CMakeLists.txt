@@ -53,6 +53,13 @@ target_sources(app
         _build_date.h
 )
 
+if(CMAKE_HOST_UNIX)
+    set(BUILD_DATE_SCRIPT ${TAGET_PROJECT_DIR}/build_date.sh)
+elseif(CMAKE_HOST_WIN32)
+    set(BUILD_DATE_SCRIPT ${TAGET_PROJECT_DIR}/build_date.bat)
+endif()
+
+message("Build script: ${BUILD_DATE_SCRIPT}")
 add_custom_command(OUTPUT _build_date.h
-    COMMAND ${TAGET_PROJECT_DIR}/build_date.bat ${PROJECT_SOURCE_DIR}/NSPE
+    COMMAND ${BUILD_DATE_SCRIPT} ${PROJECT_SOURCE_DIR}/NSPE
 )

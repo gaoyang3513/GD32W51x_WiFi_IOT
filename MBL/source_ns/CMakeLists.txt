@@ -58,7 +58,7 @@ target_add_scatter_file(${TARGET_EXE}
 target_link_options(${TARGET_EXE}
     PUBLIC
     -Wl,--just-symbols=${PROJECT_SOURCE_DIR}/ROM-EXPORT/symbol/rom_symbol.gcc
-    -Wl,-Map=${RUNTIME_OUTPUT_DIRECTORY}/${TARGET_EXE}.map
+    -Wl,-Map=${TAGET_PROJECT_DIR}/GCC/output/bin/${TARGET_EXE}.map
 )
 
 add_custom_command(TARGET ${TARGET_EXE} POST_BUILD
