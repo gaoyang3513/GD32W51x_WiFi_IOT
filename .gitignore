@@ -1,6 +1,7 @@
 
 _build_date.h
 
+.cache/
 .cmake/
 output/
 scripts/images/
