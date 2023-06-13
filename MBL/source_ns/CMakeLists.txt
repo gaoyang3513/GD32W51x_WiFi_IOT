@@ -61,7 +61,14 @@ target_link_options(${TARGET_EXE}
     -Wl,-Map=${TAGET_PROJECT_DIR}/GCC/output/bin/${TARGET_EXE}.map
 )
 
-add_custom_command(TARGET ${TARGET_EXE} POST_BUILD
-    COMMAND ${TAGET_PROJECT_DIR}/mbl_afterbuild.bat ${TAGET_PROJECT_DIR}/GCC/output/bin ${TARGET_EXE} GCC \"\"
-    COMMENT "Building ${TARGET_EXE}"
-)
+if(CMAKE_HOST_UNIX)
+    add_custom_command(TARGET ${TARGET_EXE} POST_BUILD
+        COMMAND ${TAGET_PROJECT_DIR}/mbl_afterbuild.sh ${TAGET_PROJECT_DIR}/GCC/output/bin ${TARGET_EXE} GCC \"\"
+        COMMENT "Building ${TARGET_EXE}"
+    )
+elseif(CMAKE_HOST_WIN32)
+    add_custom_command(TARGET ${TARGET_EXE} POST_BUILD
+        COMMAND ${TAGET_PROJECT_DIR}/mbl_afterbuild.bat ${TAGET_PROJECT_DIR}/GCC/output/bin ${TARGET_EXE} GCC \"\"
+        COMMENT "Building ${TARGET_EXE}"
+    )
+endif()
