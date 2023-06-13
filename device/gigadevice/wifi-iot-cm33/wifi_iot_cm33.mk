@@ -21,3 +21,4 @@ LOCAL_KERNEL := prebuilts/qemu-kernel/mips/kernel-qemu
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
+OUT_DIR := $(TOPDIR)output

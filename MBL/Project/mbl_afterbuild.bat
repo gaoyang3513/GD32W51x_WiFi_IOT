@@ -10,8 +10,6 @@ set ROOT=%OUTPUT_PATH%\..\..\..\..\..
 set SREC_CAT=%ROOT%\scripts\imgtool\srec_cat.exe
 set OUTPUT_IMAGE_PATH=%ROOT%\scripts\images
 
-
-
 if "%TOOLKIT%" == "KEIL" (
     :: Generate txt for debug
     %TOOLKIT_PATH%\ARM\ARMCC\bin\fromelf.exe --text -c -d --output=%OUTPUT_PATH%\..\%OUTPUT_NAME%.txt %OUTPUT_PATH%\%OUTPUT_NAME%.axf
@@ -36,5 +34,5 @@ IF EXIST %OUTPUT_IMAGE_PATH%\%OUTPUT_NAME%* del %OUTPUT_IMAGE_PATH%\%OUTPUT_NAME
 copy %OUTPUT_PATH%\..\%OUTPUT_NAME%.bin %OUTPUT_IMAGE_PATH%\
 :: Generate Hex file
 %SREC_CAT%  %OUTPUT_IMAGE_PATH%\%OUTPUT_NAME%.bin -Binary -offset 0x0C000000 -o %OUTPUT_IMAGE_PATH%\%OUTPUT_NAME%.hex -Intel
- 
+
 ::exit

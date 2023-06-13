@@ -1,8 +1,8 @@
 
 set(CMAKE_SYSTEM_NAME Generic)
-set(CROSS_COMPILE arm-none-eabi)
-find_program(CMAKE_C_COMPILER ${CROSS_COMPILE}-gcc)
-find_program(CMAKE_CXX_COMPILER ${CROSS_COMPILE}-g++)
+set(CROSS_COMPILE arm-none-eabi-)
+find_program(CMAKE_C_COMPILER ${CROSS_COMPILE}gcc)
+find_program(CMAKE_CXX_COMPILER ${CROSS_COMPILE}g++)
 
 set(CMAKE_ASM_COMPILER ${CMAKE_C_COMPILER})
 

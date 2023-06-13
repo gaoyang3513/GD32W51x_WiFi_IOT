@@ -6,3 +6,10 @@
 
 1. 基于官网 GD32W51x v1.0.3开发；
 2. 加入source + lunch支持；
+
+### 环境配置
+
+1. 临时增加工具链信息
+```shell
+ln -snf /opt/toolchains/gcc-arm-none-eabi/ prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8
+```

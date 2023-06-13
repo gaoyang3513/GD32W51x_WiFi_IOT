@@ -1,3 +1,11 @@
 
+_build_date.h
+
 .cmake/
 output/
+scripts/images/
+
+# MBL
+
+## Keil Project
+MBL/Project/KEIL/*.ini
