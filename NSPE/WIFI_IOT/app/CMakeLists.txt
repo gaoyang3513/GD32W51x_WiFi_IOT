@@ -32,6 +32,13 @@ target_sources(app
         ../demo/cmsis_os_demo.c
     )
 
+if(CONFIG_GY3513)
+    target_sources(app
+        PRIVATE
+        ../../Utilities/gd32w515p_eval.c
+    )
+endif(CONFIG_GY3513)
+
 target_link_libraries(app
     gd32w51x_peripheral_api
     gd32w51x_wifi_api

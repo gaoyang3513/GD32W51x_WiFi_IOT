@@ -33,6 +33,7 @@ OF SUCH DAMAGE.
 */
 
 /*============================ INCLUDES ======================================*/
+#include "wrapper_freertos.h"
 #include "wrapper_os.h"
 #include "debug_print.h"
 #include "bsp_inc.h"
@@ -48,6 +49,10 @@ OF SUCH DAMAGE.
 #ifdef CONFIG_FATFS_SUPPORT
 #include "fatfs.h"
 #endif
+#if defined (CONFIG_GY3513)
+#include <gd32w515p_eval.h>
+#endif // CONFIG_GY3513
+
 /*============================ MACROS ========================================*/
 /*============================ MACRO FUNCTIONS ===============================*/
 /*============================ TYPES =========================================*/
@@ -73,6 +78,31 @@ void do_ram_code_copy(void)
 #endif
 }
 #endif
+
+#if defined (CONFIG_GY3513)
+static int32_t led_init(void)
+{
+    gd_eval_led_init(LED1);
+    gd_eval_led_init(LED2);
+    gd_eval_led_init(LED3);
+
+    return 0;
+}
+
+void led_task(void *p_arg)
+{
+    while (1) {
+        gd_eval_led_toggle(LED1);
+        sys_ms_sleep(200);
+        gd_eval_led_toggle(LED2);
+        sys_ms_sleep(200);
+        gd_eval_led_toggle(LED3);
+        sys_ms_sleep(200);
+    }
+
+    sys_task_delete(NULL);
+}
+#endif // CONFIG_GY3513
 
 /*!
     \brief      initialize application
@@ -121,7 +151,14 @@ void start_task(void *p_arg)
 */
 int main(void)
 {
+#if defined (CONFIG_GY3513)
+    TaskHandle_t *stTaskHndl_led = NULL;
+#endif // CONFIG_GY3513
+
     platform_init();
+#if defined (CONFIG_GY3513)
+    led_init();
+#endif // CONFIG_GY3513
 
     DEBUGPRINT("SDK git revision: "WIFI_GIT_REVISION" \r\n");
     DEBUGPRINT("SDK version: V%d.%d.%d\r\n", (RE_NSPE_VERSION >> 24), ((RE_NSPE_VERSION & 0xFF0000) >> 16), (RE_NSPE_VERSION & 0xFFFF));
@@ -129,8 +166,17 @@ int main(void)
 
     sys_os_init();
 
-    if (NULL == sys_task_create(NULL, (const uint8_t *)"start_task", NULL, START_TASK_STK_SIZE, 0,
-            START_TASK_PRIO, start_task, NULL)) {
+#if defined (CONFIG_GY3513)
+    #define LED_TASK_STK_SIZE       256
+    #define LED_TASK_PRIO           (TASK_PRIO_APP_BASE + TASK_PRIO_HIGHER(1))
+
+    stTaskHndl_led = sys_task_create(NULL, (const uint8_t *)"led_task", NULL, LED_TASK_STK_SIZE, 0, LED_TASK_PRIO, led_task, NULL);
+    if (stTaskHndl_led == NULL) {
+        DEBUG_ERROR("Error, task create failed.\r\n");
+    }
+#endif // CONFIG_GY3513
+
+    if (NULL == sys_task_create(NULL, (const uint8_t *)"start_task", NULL, START_TASK_STK_SIZE, 0, START_TASK_PRIO, start_task, NULL)) {
         DEBUGPRINT("ERROR: create start task failed\r\n");
     }
 

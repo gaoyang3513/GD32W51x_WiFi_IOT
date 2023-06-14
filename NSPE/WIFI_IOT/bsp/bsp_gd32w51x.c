@@ -735,5 +735,6 @@ void platform_init(void)
     gdm3210x_fpga_init();
 #elif CONFIG_PLATFORM == PLATFORM_ASIC_32W51X
     gd32w51x_asic_init();
+
 #endif
 }
