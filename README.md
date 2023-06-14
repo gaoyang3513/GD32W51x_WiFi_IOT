@@ -1,6 +1,6 @@
 # GD32W51x_WiFi_IOT
 
-本仓库作为本人学习GD32 + RTOS + cmake知识使用，开发环境为是在Linux。
+   本仓库作为本人学习GD32 + RTOS + Cmake相关知识而使用，开发环境为Linux(Ubuntu 22.04)。
 
 ## 说明
 
