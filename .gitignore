@@ -10,3 +10,6 @@ scripts/images/
 
 ## Keil Project
 MBL/Project/KEIL/*.ini
+
+# Clang
+compile_commands.json
