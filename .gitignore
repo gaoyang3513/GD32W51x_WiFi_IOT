@@ -10,6 +10,11 @@ scripts/images/
 
 ## Keil Project
 MBL/Project/KEIL/*.ini
+*.uvgui*
+MBL/Project/KEIL/RTE/
+MBL/Project/KEIL/mbl_ns/
+NSPE/Project/WIFI_IOT/KEIL/RTE/
+NSPE/Project/WIFI_IOT/KEIL/wifi_iot/
 
 # Clang
 compile_commands.json
