@@ -10,14 +10,14 @@
       <TargetName>Target_GDM32</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6090000::V6.9::.\ARMCLANG</pCCUsed>
+      <pCCUsed>6190000::V6.19::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>GD32W515PIQ6</Device>
           <Vendor>GigaDevice</Vendor>
-          <PackID>GigaDevice.GD32W51x_DFP.1.0.2</PackID>
-          <PackURL>http://gd32mcu.com/data/documents/pack/</PackURL>
+          <PackID>GigaDevice.GD32W51x_DFP.1.0.3</PackID>
+          <PackURL>https://gd32mcu.com/data/documents/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x70000) IRAM2(0x30000000,0x70000) IROM(0x08000000,0x0200000) IROM2(0x0C000000,0x0200000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP TZ CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -184,6 +184,9 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
+            <RvdsMve>0</RvdsMve>
+            <RvdsCdeCp>0</RvdsCdeCp>
+            <nBranchProt>0</nBranchProt>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>1</hadIROM2>
             <StupSel>8</StupSel>
@@ -350,7 +353,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
-            <uClangAs>0</uClangAs>
+            <ClangAsOpt>4</ClangAsOpt>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>

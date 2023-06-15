@@ -10,12 +10,22 @@ set ROOT=%OUTPUT_PATH%\..\..\..\..\..
 set SREC_CAT=%ROOT%\scripts\imgtool\srec_cat.exe
 set OUTPUT_IMAGE_PATH=%ROOT%\scripts\images
 
-if "%TOOLKIT%" == "KEIL" (
-    :: Generate txt for debug
-    %TOOLKIT_PATH%\ARM\ARMCC\bin\fromelf.exe --text -c -d --output=%OUTPUT_PATH%\..\%OUTPUT_NAME%.txt %OUTPUT_PATH%\%OUTPUT_NAME%.axf
+for /f "tokens=1,2 delims=\"  %%a in ("%TOOLKIT_PATH%") do set driver=%%a &set version=%%b
 
-    :: Generate binary image
-    %TOOLKIT_PATH%\ARM\ARMCC\bin\fromelf.exe --bin --8x1  --bincombined --output=%OUTPUT_PATH%\..\%OUTPUT_NAME%.bin %OUTPUT_PATH%\%OUTPUT_NAME%.axf
+if "%TOOLKIT%" == "KEIL" (
+    if "%version%" == "Keil_v5" (
+        :: Generate txt for debug
+        %TOOLKIT_PATH%\ARM\ARMCLANG\bin\fromelf.exe --text -c -d --output=%OUTPUT_PATH%\..\%OUTPUT_NAME%.txt %OUTPUT_PATH%\%OUTPUT_NAME%.axf
+
+        :: Generate binary image
+        %TOOLKIT_PATH%\ARM\ARMCLANG\bin\fromelf.exe --bin --8x1  --bincombined --output=%OUTPUT_PATH%\..\%OUTPUT_NAME%.bin %OUTPUT_PATH%\%OUTPUT_NAME%.axf
+    ) else (
+        :: Generate txt for debug
+        %TOOLKIT_PATH%\ARM\ARMCC\bin\fromelf.exe --text -c -d --output=%OUTPUT_PATH%\..\%OUTPUT_NAME%.txt %OUTPUT_PATH%\%OUTPUT_NAME%.axf
+
+        :: Generate binary image
+        %TOOLKIT_PATH%\ARM\ARMCC\bin\fromelf.exe --bin --8x1  --bincombined --output=%OUTPUT_PATH%\..\%OUTPUT_NAME%.bin %OUTPUT_PATH%\%OUTPUT_NAME%.axf
+    )
 )
 if "%TOOLKIT%" == "IAR" (
     :: Generate ASM file
